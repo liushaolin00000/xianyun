@@ -19,13 +19,16 @@
 
             <!-- 登录/用户信息 -->
             <el-row type="flex" align="middle">
-
-                <!-- 如果用户存在则展示用户信息，用户数据来自store -->
-                <el-dropdown v-if="false">
+                <!-- 不存在用户信息展示登录注册链接 -->
+                <nuxt-link to="/user/login" class="account-link" v-if='!$store.state.user.userInfo.token'>
+                    登录 / 注册 
+                </nuxt-link>
+                  <!-- 如果用户存在则展示用户信息，用户数据来自store -->
+                <el-dropdown v-else>
                     <el-row type="flex" align="middle" class="el-dropdown-link">
                         <nuxt-link to="#">
-                            <img src="http://157.122.54.189:9093/images/pic_sea.jpeg"/>
-                            用户名
+                            <img :src="$axios.defaults.baseURL+$store.state.user.userInfo.user.defaultAvatar"/>
+                            {{$store.state.user.userInfo.user.nickname}}
                         </nuxt-link>
                         <i class="el-icon-caret-bottom el-icon--right"></i>
                     </el-row>
@@ -38,20 +41,24 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-
-                <!-- 不存在用户信息展示登录注册链接 -->
-                <nuxt-link to="/user/login" class="account-link" v-else>
-                    登录 / 注册 
-                </nuxt-link>
             </el-row>
         </el-row>
     </header>
 </template>
 <script>
 export default {
+    data(){
+        return{
+           
+        }
+    },
     methods: {
-        // 用户退出
-        handleLogout(){},
+        handleLogout(){
+            //清空用户数据
+            this.$store.commit('user/setUserInfo',{})
+        },
+    },
+    mounted(){
     }
 }
 </script>
