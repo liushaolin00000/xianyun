@@ -56,6 +56,8 @@ export default {
         handleLogout(){
             //清空用户数据
             this.$store.commit('user/setUserInfo',{})
+            //跳转到登录页面
+            this.$router.push('/user/login')
         },
     },
     mounted(){

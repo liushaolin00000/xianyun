@@ -97,18 +97,7 @@ export default {
   methods: {
     // 发送验证码
     async handleSendCaptcha() {
-      if (this.form.username) {
-        const res = await this.$axios({
-          url: "/captchas",
-          method: "POST",
-          data: {
-            tel: this.form.username
-          }
-        });
-          this.$message.success('当前手机验证码是:'+res.data.code)
-      }else{
-        this.$message.error('手机号码不能为空')
-      }
+      this.$store.dispatch('user/Captcha',this.form.username)
     },
 
     // 注册

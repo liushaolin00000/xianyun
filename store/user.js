@@ -1,3 +1,6 @@
+//导入提示插件
+import { Message } from 'element-ui';
+
 //固定写法，暴露出state
 export const state = () => {
   return {
@@ -14,5 +17,32 @@ export const mutations = {
 }
 //存放的是异步修改state的方法
 export const actions = {
+  //封装了登录请求的方法
+  async login(store, data) {
+    var res = await this.$axios({
+      url: "accounts/login",
+      method: "POST",
+      data: data
+    })
+    if (res.status === 200) {
+      store.commit("setUserInfo", res.data);
+    }
+    return res
+  },
+  //封装了发送验证码请求的方法
+  async Captcha(store, data) {
+    if (data) {
+      const res = await this.$axios({
+        url: "/captchas",
+        method: "POST",
+        data: {
+          tel: data
+        }
+      });
+      Message.success('当前手机验证码是:' + res.data.code)
+    } else {
+      Message.error('手机号码不能为空')
+    }
+  }
 
 }

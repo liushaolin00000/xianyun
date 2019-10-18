@@ -40,26 +40,23 @@ export default {
     // 提交登录
     handleLoginSubmit() {
       //在表单里面提供了一个方法验证表单是否通过
-      this.$refs.form.validate(vaild => {
+      this.$refs.form.validate(async vaild => {
         //如果表单验证通过就请求后台的登录接口
         if (vaild) {
-          this.$axios({
-            url: "accounts/login",
-            method: "POST",
-            data: this.form
-          }).then(res => {
+            //调用user里面的方法
+           const res = await this.$store.dispatch('user/login',this.form)
+          //  console.log(res)
             //如果登录成功则提示用户
-            if(res.status==200){
-               this.$message.success('登录成功')
-               //提取data里面的数据
-               const {data} = res
-               //将数据存放到vuex里面  vuex不能直接赋值来修改
+            if (res.status == 200) {
+              this.$message.success("登录成功");
+              //将数据存放到vuex里面  vuex不能直接赋值来修改
               //  this.$store.user.username = data.user.nickname
-            //  通过调用mutation下的方法修改掉state的值，使用commit调用mutation
-              this.$store.commit('user/setUserInfo',data)
-               console.log(this.$store.state.user.userInfo)
+              //  通过调用mutation下的方法修改掉state的值，使用commit调用mutation
+              // 登录成功跳转到首页
+              this.$router.back();
+              
             }
-          });
+          
         }
       });
     }
