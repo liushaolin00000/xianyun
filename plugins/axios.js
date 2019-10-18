@@ -14,8 +14,9 @@ export default (context)=>{
         if(statusCode === 400){
             Message.warning({message});
         }
-        if(statusCode === 403){
+        if(statusCode === 403||statusCode===401){
             //路由重定向的方法,发现403表示没有权限访问则跳转到登录页面
+            Message.warning({message})
            context.redirect('/user/login')
         }
     })
