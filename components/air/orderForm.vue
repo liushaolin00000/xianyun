@@ -66,7 +66,7 @@
       </div>
     </div>
     <!-- 让计算总价格的代码执行起来 -->
-    <input type="hidden" :value="allPrice">
+    <input type="hidden" :value="allPrice" />
   </div>
 </template>
 
@@ -78,14 +78,14 @@ export default {
       // totalPrice:5,
       //机票详情
       detail: {
-        seat_infos:{}
+        seat_infos: {}
       },
       //用户列表
       users: [
         {
           username: "",
           id: ""
-        },
+        }
       ],
       //保险id的集合
       insurances: [],
@@ -125,7 +125,7 @@ export default {
     },
     // 发送手机验证码
     handleSendCaptcha() {
-        this.$store.dispatch('user/Captcha',this.contactPhone)
+      this.$store.dispatch("user/Captcha", this.contactPhone);
     },
 
     // 提交订单
@@ -142,39 +142,39 @@ export default {
       };
       //向后台提交机票订单，以进行下一步操作
       this.$axios({
-           url:'/airorders',
-           method:'POST',
-           data:data,
-           //添加请求头，增加权限问题  
-           headers:{
-              Authorization: `Bearer ${this.$store.state.user.userInfo.token}`
-           }
-      }).then(res=>{
-           if(res.status == 200){
-               this.$message.success(res.data.message)
-               //订单提交成功后，跳转到付款页面
-               this.$router.push({
-                 path:'/air/pay',
-                 query:{id:res.data.data.id}
-               })
-           }else{
-               this.$message.error(res.data.message)
-           }
-      })
+        url: "/airorders",
+        method: "POST",
+        data: data,
+        //添加请求头，增加权限问题
+        headers: {
+          Authorization: `Bearer ${this.$store.state.user.userInfo.token}`
+        }
+      }).then(res => {
+        if (res.status == 200) {
+          this.$message.success(res.data.message);
+          //订单提交成功后，跳转到付款页面
+          this.$router.push({
+            path: "/air/pay",
+            query: { id: res.data.data.id }
+          });
+        } else {
+          this.$message.error(res.data.message);
+        }
+      });
     }
   },
-  computed:{
-     //计算总价格
-    allPrice(){
-       let price = 9;
-       let len = this.users.length;
-       price +=this.detail.seat_infos.org_settle_price*len;
-       this.insurances.forEach(v=>{
-         price +=this.detail.insurances[v-1].price*len;
-       });
-       price +=this.detail.airport_tax_audlet*len;
-       this.$emit('totalprice',price)
-       return price
+  computed: {
+    //计算总价格
+    allPrice() {
+      let price = 9;
+      let len = this.users.length;
+      price += this.detail.seat_infos.org_settle_price * len;
+      this.insurances.forEach(v => {
+        price += this.detail.insurances[v - 1].price * len;
+      });
+      price += this.detail.airport_tax_audlet * len;
+      this.$emit("totalprice", price);
+      return price;
     }
   },
   mounted() {
@@ -189,7 +189,7 @@ export default {
     }).then(res => {
       this.detail = res.data;
       // //页面加载后请求机票详情成功后将机票详情传递到父组件
-      this.$emit('getDetail',this.detail)
+      this.$emit("getDetail", this.detail);
       // this.$emit('totalprice',this.totalPrice)
       // console.log(this.detail)
     });

@@ -92,11 +92,10 @@ export default {
       total: 0
     };
   },
-
-  watch: {
+  watch:{
     //监听路由的变化 watch可以监听实例下的所有属性
     $route() {
-     this.getList()
+      this.getList()
     }
   },
   mounted() {
