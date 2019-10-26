@@ -23,6 +23,8 @@ export default {
 }
 </script>
 <style>
+/* 导入字体图标地址 */
+@import url('http://at.alicdn.com/t/font_1468828_1t5nkhafrj.css');
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;

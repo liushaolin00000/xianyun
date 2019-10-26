@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>js实现内容模块展开和收缩</title>
+  <style>
+    p {
+      width: 400px;
+      margin: 40px auto;
+      border: 5px solid yellow;
+      padding: 20px;
+    }
+
+  </style>
+  <script>
+    window.onload = function () {
+      var span = document.getElementsByTagName("span")[0];
+      console.log(span);
+      var btn = document.getElementsByTagName("a")[0];
+      //拿到所有文字
+      var str = span.innerHTML;
+      //设置一个开关，记录展开和收缩
+      var isOn = true;
+      //btn添加事件，在事件里修改span文字
+      btn.onclick = function () {
+        //点击按钮的时候改变开关的值
+        isOn = !isOn;
+        if (isOn == true) {
+          span.innerHTML = str;
+          btn.innerHTML = "收缩";
+        } else {
+          //收缩
+          span.innerHTML = str.substring(0, 30) + "...";
+          btn.innerHTML = "展开";
+        }
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <p>
+    <span>
+      刚好遇见你，余生都是你
+
+      ------愿每一个等待的人最后都能精诚开，愿每一个去爱的人都能被温柔待。
+
+      今生今世，你负责美丽，我负责爱你。其他无能为力的交给风，交给雨，交给蓝天白云，交给大地海洋。
+
+      今生今世，愿世界对你温柔深情以待。免你惊，免你苦，免你四下流离，免你无枝可依。
+
+      不知何时起，你成了我心中守口如瓶的一个秘密，我不会再向别人分享你的消息，也不愿与别人分享你生命里的点点滴滴。
+
+      爱本就是自私的，不自私的爱还算爱吗？我很自私的想让你留在身边，于现在牵手于未来白头。
+
+      我再爱你，亦不能替你做任何决定，也无力想去改变你的脾气。
+
+      仔细想来不如索性对如风的你三缄其口，对生活赐予的一切照单全收。
+
+      我相信每一个等待的人最后都能精诚开，每一个去爱的人都能被温柔待；
+
+      每一个努力的人都会有所收，每一对相爱的人都能到最后。
+
+      等我们年迈蹉跎，步履缓慢，家庭和睦美满，儿女承欢膝下。
+
+      等我们颐养天年，不再为功名奔波，不再为生计忙碌。
+
+      若我还能鼓起勇气，若你还愿洗耳恭听，依然会说我爱你。
+
+      用我那牙口不全的嘴唇，吻你依然美丽的脸颊。
+
+      我会洗去一身风尘疲惫，满脸回忆的向你说起我们的前尘往事。
+
+      说一个从年少到迟暮，从青年到老去属于我们相知相爱的故事。
+
+      你是莞尔失笑，还是潸然泪下，亦或是挽起我的手臂，如现在一样的幸福甜蜜。
+    </span>
+    <a href="javascript:;">收缩</a>
+  </p>
+
+</body>
+
+</html>
